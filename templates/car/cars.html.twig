@@ -3,11 +3,26 @@
 {% block title %} Voitures {% endblock %}
 
 {% block main %}
-
     <div class="container">
 
         <section class="title my-4">
             <h1 class="text-center">Liste des voitures</h1>
+        </section>
+
+        <section class="text-center search-car">
+            <div class="row d-flex justify-content-center align-items-center mx-2">
+                <div class="col-4">
+                    {{ form_start(form) }}
+                    {{ form_row(form.minYear) }}
+                </div>
+                <div class="col-4">
+                    {{ form_row(form.maxYear) }}
+                </div>
+                <div class="col-2">
+                    <input type="submit" value="Rechercher" class="btn btn-primary mt-3">
+                    {{ form_end(form) }}
+                </div>
+            </div>
         </section>
 
         <section class="cars my-4">
@@ -15,7 +30,7 @@
                 <div class="col d-flex justify-content-center flex-wrap">
 
                     {% for car in cars %}
-                    <div class="card m-3" style="max-width: 530px;">
+                    <div class="card m-3 bg-light" style="max-width: 530px;">
                         <div class="row g-0 h-100 w-100">
                             <div class="col-md-5  ">
                                 <img src="{{ asset('assets/images/' ~ car.model.image) }}" class="img-fluid rounded-start" alt="{{ car.model.name }}">

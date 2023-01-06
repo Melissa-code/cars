@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Car;
+use App\Entity\SearchCar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -43,12 +44,23 @@ class CarRepository extends ServiceEntityRepository
     /**
      * Pagination
      *
+     * @param SearchCar $searchCar
      * @return Query
      */
-    public function findAllWithPagination(): Query
+    public function findAllWithPagination(SearchCar $searchCar): Query
     {
-        return $this->createQueryBuilder('c')
-            ->getQuery();
+        $req = $this->createQueryBuilder('c');
+        if($searchCar->getMinYear()){
+            $req->andWhere('c.year >= :min')
+                ->setParameter('min', $searchCar->getMinYear())
+            ;
+        }
+        if($searchCar->getMaxYear()){
+            $req->andWhere('c.year <= :max')
+                ->setParameter('max', $searchCar->getMaxYear())
+            ;
+        }
+            return $req->getQuery();
     }
 //    /**
 //     * @return Car[] Returns an array of Car objects
