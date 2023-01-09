@@ -1,12 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Modification de la voiture {% endblock %}
+{% block title %}
+    {% if isUpdated %}
+        <h1 class="text-center">Modification de la voiture {{ car.registration }}</h1>
+    {% else %}
+        <h1 class="text-center">Création d'une voiture</h1>
+    {% endif %}
+{% endblock %}
 
 {% block main %}
 <div class="container">
 
     <section class="title my-4">
-        <h1 class="text-center">Modification de la voiture {{ car.registration }}</h1>
+        {% if isUpdated %}
+            <h1 class="text-center">Modification de la voiture {{ car.registration }}</h1>
+        {% else %}
+            <h1 class="text-center">Création d'une voiture</h1>
+        {% endif %}
     </section>
 
     <section class="form-update">

@@ -46,6 +46,8 @@ class AdminController extends AbstractController
             $car = new Car();
         }
 
+        $isUpdated = $car->getId() !== null;
+
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
 
@@ -53,14 +55,14 @@ class AdminController extends AbstractController
             $managerRegistry->getManager()->persist($car);
             $managerRegistry->getManager()->flush();
 
-            $this->addFlash("success", "La modification a bien été effectuée.");
+            $this->addFlash("success", ($isUpdated) ? "La modification a bien été effectuée." : "L'ajout a bien été effectué.");
             return $this->redirectToRoute('app_admin');
         }
 
         return $this->render('admin/updateCar.html.twig', [
             "car" => $car,
             "form" => $form->createView(),
-
+            "isUpdated" => $isUpdated,
         ]);
     }
 
