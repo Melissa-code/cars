@@ -39,7 +39,7 @@ class AdminController extends AbstractController
 
 
     #[Route('/admin/creation', name: 'app_create_car')]
-    #[Route('/admin/{id}', name: 'app_update_car')]
+    #[Route('/admin/{id}', name: 'app_update_car', methods: 'GET|POST')]
     public function update(Car $car = null, Request $request, ManagerRegistry $managerRegistry): Response
     {
         if(!$car){
@@ -67,5 +67,19 @@ class AdminController extends AbstractController
     }
 
 
+    #[Route('/admin/{id}', name: 'app_delete_car', methods: 'sup')]
+    public function delete(Car $car, Request $request, ManagerRegistry $managerRegistry): Response
+    {
+        if($this->isCsrfTokenValid("sup".$car->getId(), $request->get("_token"))){
+            $managerRegistry->getManager()->remove($car);
+            $managerRegistry->getManager()->flush();
+
+            $this->addFlash("success", "La suppression a bien été effectuée.");
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('car/cars.html.twig', [
+        ]);
+    }
 
 }
