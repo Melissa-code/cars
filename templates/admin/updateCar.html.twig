@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modification de la voiture {% endblock %}
+
+{% block main %}
+<div class="container">
+
+    <section class="title my-4">
+        <h1 class="text-center">Modification de la voiture {{ car.registration }}</h1>
+    </section>
+
+    <section class="form-update">
+        <div class="row">
+            <div class="col">
+
+                {{ form_start(form) }}
+
+                {{ form_row(form.registration) }}
+                {{ form_row(form.doors) }}
+                {{ form_row(form.year) }}
+                {{ form_row(form.model) }}
+
+                <div class="text-center">
+                    <a href="{{ path('app_admin') }}" class="btn btn-dark">Revenir</a>
+                    <input type="submit" class="btn btn-success" value="Enregistrer">
+                </div>
+
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}
