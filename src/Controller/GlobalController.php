@@ -42,7 +42,9 @@ class GlobalController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            // role_user by default (not be null)
             $user->setRoles("ROLE_USER");
+            // Hash the password before to record it in the DB
             $hashedPassword = $hasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hashedPassword);
             // register data in the database
@@ -54,7 +56,21 @@ class GlobalController extends AbstractController
 
         return $this->render('global/signup.html.twig', [
             "form" => $form->createView(),
+        ]);
+    }
 
+    #[Route('/connexion', name: 'app_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('global/login.html.twig', [
+            "error" => $error,
+            "lastUsername" => $lastUsername
         ]);
     }
 }
