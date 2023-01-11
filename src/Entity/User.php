@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements  PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,11 +16,25 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 3,
+        max: 50,
+        minMessage: 'Le nom d\'utilisateur doit avoir plus de {{ limit }} caractères',
+        maxMessage: 'Le nom d\'utilisateur doit avoir moins de {{ limit }}  caractères',
+    )]
+    #[UniqueEntity('username')]
     private ?string $username = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 3,
+        max: 50,
+        minMessage: 'Le mot de passe doit avoir plus de {{ limit }} caractères',
+        maxMessage: 'Le mot de passe doit avoir moins de {{ limit }}  caractères',
+    )]
     private ?string $password = null;
 
+    #[Assert\EqualTo(propertyPath: "password", message: "Les mots de passe doivent être identiques")]
     private ?string $passwordConfirm = null;
 
     #[ORM\Column(length: 255)]
@@ -75,5 +91,35 @@ class User
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->username;
+    }
+
+    public function hashPassword(PasswordAuthenticatedUserInterface $user, string $plainPassword): string
+    {
+        // TODO: Implement hashPassword() method.
+    }
+
+    public function isPasswordValid(PasswordAuthenticatedUserInterface $user, string $plainPassword): bool
+    {
+        // TODO: Implement isPasswordValid() method.
+    }
+
+    public function needsRehash(PasswordAuthenticatedUserInterface $user): bool
+    {
+        // TODO: Implement needsRehash() method.
     }
 }
