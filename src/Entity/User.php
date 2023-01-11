@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields:['username'], message: "Ce nom d'utilisaeur existe déjà.")]
 class User implements  PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -22,7 +24,6 @@ class User implements  PasswordAuthenticatedUserInterface
         minMessage: 'Le nom d\'utilisateur doit avoir plus de {{ limit }} caractères',
         maxMessage: 'Le nom d\'utilisateur doit avoir moins de {{ limit }}  caractères',
     )]
-    #[UniqueEntity('username')]
     private ?string $username = null;
 
     #[ORM\Column(length: 255)]
