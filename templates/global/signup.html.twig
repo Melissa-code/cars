@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Inscription
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="container">
+
+        <section class="title my-4">
+            <h1 class="text-center">Inscription</h1>
+        </section>
+
+        <section class="sign-up h-100">
+            <div class="col-md-10 mx-auto col-lg-5 mt-5">
+                <div class="p-4 p-md-5 border rounded-3 bg-light">
+
+                    {{ form_start(form) }}
+
+                    <div class="form-floating mb-3">
+                        {{ form_row(form.username) }}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form_row(form.password) }}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form_row(form.passwordConfirm) }}
+                    </div>
+                    <input class="w-100 btn btn-lg btn-info" type="submit" value="S'inscrire">
+                    <hr class="my-4">
+                    <small class="text-muted">En cliquant sur S'inscrire, vous acceptez les termes d'utilisation.</small>
+
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+{% endblock %}
