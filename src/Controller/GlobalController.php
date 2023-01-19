@@ -27,7 +27,7 @@ class GlobalController extends AbstractController
     }
 
     /**
-     * Sign-up form page
+     * Sign-up
      *
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
@@ -59,18 +59,32 @@ class GlobalController extends AbstractController
         ]);
     }
 
+    /**
+     * Login
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route('/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
 
         return $this->render('global/login.html.twig', [
             "error" => $error,
             "lastUsername" => $lastUsername
         ]);
     }
+
+    /**
+     * Logout
+     */
+    #[Route('/deconnexion', name: 'app_logout')]
+    public function logout(): void
+    {
+    }
+
 }

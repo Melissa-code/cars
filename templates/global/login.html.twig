@@ -16,6 +16,8 @@
         <section class="sign-up h-100 mt-5">
             <div class="col-md-10 mx-auto col-lg-5">
 
+                {# Error alert #}
+
                 {% if error %}
                     <div class="alert alert-danger alert-dismissible text-center"  role="alert">
                         <p>Nom d'utilisateur ou mot de passe erroné.</p>
@@ -23,13 +25,15 @@
                     </div>
                 {% endif %}
 
+                {# Login form #}
+
                 <form action="{{ path('app_login') }}" method="post" class="p-4 p-md-5 border rounded-3 bg-light">
                     <div class="form-floating mb-3">
                         <input type="text" name="_username" value="{{ lastUsername }}" class="form-control" id="username" placeholder="Nom d'utilisateur" required>
                         <label for="username">Nom d'utilisateur :</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" name="_password" class="form-control" id="password" placeholder="Mot de passe">
+                        <input type="password" name="_password" class="form-control" id="password" placeholder="Mot de passe" required>
                         <label for="password">Mot de passe :</label>
                     </div>
                     <div class="checkbox mb-3">
