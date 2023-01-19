@@ -1,0 +1,27 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    font-size: 18px;
+    font-family: 'Prompt', sans-serif;
+}
+
+h1, h2 {
+    font-family: 'Michroma', sans-serif;
+    font-size: 3rem;
+}
+
+.home {
+    background-image: url("../assets/images/model0.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.logo {
+    font-family: 'Michroma', sans-serif;
+}
