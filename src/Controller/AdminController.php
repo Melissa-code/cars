@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-//use Symfony\Component\Intl\Languages;
+use Symfony\Component\Intl\Locales;
 
 
 class AdminController extends AbstractController
@@ -25,6 +25,7 @@ class AdminController extends AbstractController
         $searchCar = new SearchCar();
         Locale::setDefault('fr-FR');
         echo Locale::getDefault();
+
 
         $form = $this->createForm(SearchCarType::class, $searchCar);
         $form->handleRequest($request);
