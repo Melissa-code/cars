@@ -9,19 +9,22 @@ use App\Form\SearchCarType;
 use App\Repository\CarRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Intl\Languages;
-use Symfony\Contracts\Translation\TranslatorInterface;
+//use Symfony\Component\Intl\Languages;
+
 
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function getAll(CarRepository $carRepository, PaginatorInterface $paginator, Request $request, TranslatorInterface $translator): Response
+    public function getAll(CarRepository $carRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $searchCar = new SearchCar();
+        Locale::setDefault('fr-FR');
+        echo Locale::getDefault();
 
         $form = $this->createForm(SearchCarType::class, $searchCar);
         $form->handleRequest($request);
