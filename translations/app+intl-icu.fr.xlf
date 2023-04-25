@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="PBWgXwF" resname="form.minYear">
+        <source>form.minYear</source>
+        <target>Année de</target>
+      </trans-unit>
+      <trans-unit id="Fhc19cc" resname="form.maxYear">
+        <source>form.maxYear</source>
+        <target>Année à</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -14,11 +14,11 @@ class SearchCarType extends AbstractType
     {
         $builder
             ->add('minYear', IntegerType::class, [
-                'label' => 'Année de :',
+                //'label' => 'Année de',
                 'required' => 'false'
             ])
             ->add('maxYear', IntegerType::class, [
-                'label' => 'Année à :',
+                //'label' => 'Année à',
                 'required' => 'false'
             ])
         ;

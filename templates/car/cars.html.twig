@@ -2,14 +2,17 @@
 
 {% block title %} Voitures {% endblock %}
 
+{% trans_default_domain 'app' %}
+
 {% block main %}
     <div class="container">
 
+        {# Title #}
         <section class="title my-4">
             <h1 class="text-center">Liste des voitures</h1>
         </section>
 
-
+        {# Flashes messages #}
         <section class="confirm-message text-center">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -22,14 +25,24 @@
         </section>
 
         <hr>
+
+        {# years form #}
         <section class="text-center search-car my-2">
             <div class="row d-flex justify-content-center align-items-center mx-2">
                 <div class="col-4">
                     {{ form_start(form) }}
-                    {{ form_row(form.minYear) }}
+{#                    {{ form_row(form.minYear) }}#}
+                    <label>
+                        {{'form.minYear'|trans }}
+                    </label>
+                        {{ form_widget(form.minYear) }}
                 </div>
                 <div class="col-4">
-                    {{ form_row(form.maxYear) }}
+                    <label>
+                        {{'form.maxYear'|trans }}
+                        {{ form_widget(form.maxYear) }}
+                    </label>
+{#                    {{ form_row(form.maxYear) }}#}
                 </div>
                 <div class="col-2">
                     <input type="submit" value="Rechercher" class="btn btn-dark mt-3">
@@ -39,6 +52,7 @@
         </section>
         <hr>
 
+        {# Create a car link #}
         {% if admin %}
         <section class="add-car mt-4">
             <div class="row ">
@@ -52,6 +66,7 @@
         </section>
         {% endif %}
 
+        {# List of the cars #}
         <section class="cars my-4">
             <div class="row">
                 <div class="col d-flex justify-content-center flex-wrap">
