@@ -9,12 +9,12 @@ use App\Form\SearchCarType;
 use App\Repository\CarRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
-use Locale;
+//use Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Intl\Locales;
+//use Symfony\Component\Intl\Locales;
 
 
 class AdminController extends AbstractController
@@ -23,9 +23,7 @@ class AdminController extends AbstractController
     public function getAll(CarRepository $carRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $searchCar = new SearchCar();
-        Locale::setDefault('fr-FR');
-        echo Locale::getDefault();
-
+        //Locale::setDefault('fr-FR');
 
         $form = $this->createForm(SearchCarType::class, $searchCar);
         $form->handleRequest($request);
